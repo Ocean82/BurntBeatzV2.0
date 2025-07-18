@@ -1,0 +1,5 @@
+{
+    "cody.net.proxy.skipCertValidation": true,
+    "cody.codebase": "https://github.com/Ocean82/BurntBeatzV2.0",
+    "files.autoSave": "afterDelay"
+}
