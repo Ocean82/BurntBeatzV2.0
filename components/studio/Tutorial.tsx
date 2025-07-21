@@ -1,0 +1,1 @@
+export default function Tutorial() {\n  return (\n    <div className=\"mt-8 p-4 bg-black/60 rounded text-green-200\">\n      <h3 className=\"font-bold mb-2\">Getting Started</h3>\n      <p>Try loading <b>The Star-Spangled Banner</b> and experiment with genres, instruments, and effects!<br />Hover over controls for tips.</p>\n    </div>\n  )\n}\n

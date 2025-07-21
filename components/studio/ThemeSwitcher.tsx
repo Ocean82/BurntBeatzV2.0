@@ -1,0 +1,1 @@
+export default function ThemeSwitcher() {\n  return (\n    <div className=\"mb-8\">\n      <button className=\"bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 rounded\">\n        Switch Theme\n      </button>\n    </div>\n  )\n}\n
