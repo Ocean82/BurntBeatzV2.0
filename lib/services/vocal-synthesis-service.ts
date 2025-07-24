@@ -110,6 +110,14 @@ export class VocalSynthesisService {
 
     console.log(`🎤 Generating Star Spangled Banner vocals for ${voiceName}`)
 
+    // Check if we're in a browser environment
+    if (typeof window === 'undefined') {
+      // Server-side: return a mock URL for now
+      const mockUrl = `/api/audio/vocals/${voiceName}.wav`
+      preset.audioUrl = mockUrl
+      return mockUrl
+    }
+
     const context = new (window.AudioContext || (window as any).webkitAudioContext)()
     const totalDuration = 9 // 9 seconds for the excerpt
     const buffer = context.createBuffer(2, totalDuration * this.SAMPLE_RATE, this.SAMPLE_RATE)
@@ -408,13 +416,18 @@ export class VocalSynthesisService {
     return clonedAudioUrl
   }
 
-  private static async analyzeOriginalVoice(audioBlob: Blob): Promise<AudioBuffer> {
+  private static async analyzeOriginalVoice(audioBlob: Blob): Promise<AudioBuffer | null> {
+    if (typeof window === 'undefined') {
+      // Server-side: return null for now
+      return null
+    }
+    
     const context = new (window.AudioContext || (window as any).webkitAudioContext)()
     const arrayBuffer = await audioBlob.arrayBuffer()
     return await context.decodeAudioData(arrayBuffer)
   }
 
-  private static extractFormants(audioBuffer: AudioBuffer, characteristics: any): number[] {
+  private static extractFormants(audioBuffer: AudioBuffer | null, characteristics: any): number[] {
     // Simplified formant extraction based on voice characteristics
     const baseFormants = [700, 1100, 2600] // Default female formants
 
